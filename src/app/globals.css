@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #f6f5f1;
+  --color-secondary: #0b0d0e;
+    
+  --font-instrument-serif: var(--font-InstrumentSerif);
+  --font-Geist_Mono: var(--font-geistMono);
+}

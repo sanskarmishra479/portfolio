@@ -19,7 +19,7 @@ export default function Hero() {
           <h1 className="w-120" key={index}>{paragraph}</h1>
         ))}
       </div>
-      <div className="px-4 py-2 flex items-center gap-6 w-full border-b border-dashed border-white/10">
+      <div className="px-4 py-2 flex items-center gap-6 w-full">
         {links.map((link, index) => (
           <Link className="hero-link text-white text-[12px] hover:text-white uppercase font-Geist_Mono" href={link.href} key={index} target={link.external ? "_blank" : "_self"}>{link.label}</Link>
         ))}

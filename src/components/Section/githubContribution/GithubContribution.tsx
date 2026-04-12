@@ -1,5 +1,5 @@
 import { unstable_cache } from "next/cache";
-import { ContributionGraphClient } from "./GithubContributionClient";
+import { ContributionGraphClient } from "./GithubContributionClient"; 
 
 type GitHubContributionsResponse = {
   total: Record<string, number>;
@@ -35,7 +35,7 @@ export default async function GithubContribution() {
   );
 
   return (
-    <div className="px-4 py-6">
+    <div className="p-4 border-b border-dashed border-white/10">
       <ContributionGraphClient data={filtered} totalCount={lifetimeTotal} />
     </div>
   );

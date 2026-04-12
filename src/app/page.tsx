@@ -1,11 +1,15 @@
-import Container from "../components/Container";
-import Hero from "../components/Hero";
+import Container from "../components/Section/Container";
+import Hero from "../components/Section/Hero";
+import TechStack from "../components/Section/TechStack";
+import Seperator from "../components/ui/Seperator";
 
 export default function Home() {
   return (
-    <div className="flex justify-center h-screen bg-secondary">
+    <div className="flex justify-center h-screen bg-mainSecondary">
       <Container>
         <Hero />
+        <Seperator />
+        <TechStack />
       </Container>
     </div>
   );

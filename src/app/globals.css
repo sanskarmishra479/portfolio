@@ -4,6 +4,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
+.container ::selection {
+  background-color: #fffff0;
+  color: #000000;
+}
+
 @theme {
   --color-mainPrimary: #f6f5f1;
   --color-mainSecondary: #0b0d0e;

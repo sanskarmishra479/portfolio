@@ -83,57 +83,23 @@
     "projects": [
       {
         "num": "01",
-        "name": "MPMC Queue",
-        "desc": "Bounded multi-producer multi-consumer queue in Rust. Mutex/Condvar, blocking + non-blocking modes. 72.3M ops/sec. 13 integration tests. Zero unsafe code.",
-        "stack": ["Rust", "Concurrency"],
-        "meta": "72.3M ops/sec · 13 tests · 0 unsafe",
-        "github": "https://github.com/Some1Uknow/mpmc-queue-rust"
+        "name": "ScryCLI",
+        "desc": "AI-powered CLI like Claude Code and CodeX. It is a tool that allows you to use AI to write code and chat with it.",
+        "stack": ["Node.js", "TypeScript", "OpenRouter", "Ink", "Agent Harness"],
+        "image": "https://i.pinimg.com/736x/31/a3/67/31a367ff7a3a3c10c0ef9146183cfa85.jpg",
+        "github": "https://github.com/sanskarmishra479/scrycli",
+        "live": "https://www.npmjs.com/package/scrycli"
       },
       {
         "num": "02",
-        "name": "solana-txn-tui",
-        "desc": "Published Rust crate for exploring Solana transactions and accounts in the terminal. cargo install, Homebrew, or curl. Fee breakdown, instruction details, token transfers. Mainnet / Devnet / Testnet.",
-        "stack": ["Rust", "Ratatui", "Solana RPC"],
-        "meta": "crates.io · Homebrew · Windows binary · 4 releases",
-        "github": "https://github.com/Some1Uknow/solana-txn-tui",
-        "live": "https://crates.io/crates/solana-txn-tui",
-        "liveLabel": "crates.io"
-      },
-      {
-        "num": "03",
-        "name": "CPMM",
-        "desc": "On-chain constant product market maker on Solana. x·y=k for token swaps and liquidity provision. PDA-controlled token vaults. Deposit, swap, withdraw — atomic.",
-        "stack": ["Rust", "Anchor", "Solana", "DeFi"],
-        "meta": "On-chain AMM · SPL tokens · PDA vaults",
-        "github": "https://github.com/Some1Uknow/cpmm"
-      },
-      {
-        "num": "04",
-        "name": "EzDeploy",
-        "desc": "Self-hosted deployment platform. Push to GitHub, get a live URL on a unique subdomain. Isolated Docker build container per deploy, real-time log streaming.",
-        "stack": ["TypeScript", "Docker", "CI/CD"],
-        "meta": "Zero-config deploys · Real-time logs · Unique subdomains",
-        "github": "https://github.com/Some1Uknow/ezdeploy"
-      },
-      {
-        "num": "05",
-        "name": "Escrow Program",
-        "desc": "Trustless on-chain escrow in Anchor/Rust. Deposit, refund, take — secured via PDA-controlled SPL token vaults. Atomic settlement, no off-chain intermediaries.",
-        "stack": ["Rust", "Anchor", "Solana"],
-        "meta": "Trustless · PDA vaults · Atomic settlement",
-        "github": "https://github.com/Some1Uknow/escrow"
-      },
-      {
-        "num": "06",
-        "name": "Observer",
-        "desc": "Self-hosted Solana observability indexer in Rust. Uses WebSocket slot updates plus RPC block fetches, Postgres upserts, and a persisted cursor for crash-safe resume. Built for near real-time network health and protocol risk monitoring.",
-        "stack": ["Rust", "Solana RPC", "WebSockets", "Postgres"],
-        "meta": "Crash-safe resume · Idempotent upserts · Protocol risk monitoring",
-        "github": "https://github.com/Some1UKnow/observer"
+        "name": "xAI-Frontend",
+        "desc": "X.AI hero section in ReactJS with that smoke effect using Unicornstudio",
+        "stack": ["React", "TypeScript", "Tailwind CSS", "Unicornstudio"],
+        "image": "https://i.pinimg.com/736x/13/42/80/134280bbd07c72406bc4c899cb545293.jpg",
+        "github": "https://github.com/sanskarmishra479/xAI",
+        "live": "https://xai-tan.vercel.app/"
       }
     ],
-
-    "writing": [],
 
     "awards": [
       {

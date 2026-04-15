@@ -18,13 +18,14 @@ export default function ProjectCard({
       <Image
         src={image}
         alt={`${name} project image`}
-        width={500}
-        height={500}
-        className="object-cover grayscale group-hover:grayscale-0"
+        width={385}
+        height={200}
+        loading="eager"
+        className="object-cover grayscale group-hover:grayscale-0 w-full h-54"
       />
       <div className="p-2">
         <div className="flex items-center justify-between gap-2">
-          <h1 className="text-white text-[12px] font-Geist_Mono">{name}</h1>
+          <h1 className="text-white text-[18px] font-instrument-serif">{name}</h1>
           <div className="flex items-center gap-2">
             <Link
               href={live || ""}

@@ -1,10 +1,11 @@
-import Container from "../components/Section/Container";
-import Hero from "../components/Section/Hero";
-import TechStack from "../components/Section/TechStack";
-import GithubContribution from "../components/Section/githubContribution/GithubContribution";
-import Project from "../components/ui/Project";
-import Seperator from "../components/ui/Seperator";
+import Container from "../components/sections/Container";
+import Hero from "../components/sections/Hero";
+import TechStack from "../components/sections/TechStack";
+import GithubContribution from "../components/sections/githubContribution/GithubContribution";
+import ProjectCard from "../components/ui/ProjectCard";
+import Seperator from "../components/ui/Separator";
 import site from "../data/site.json";
+
 
 export default function Home() {
   return (
@@ -17,7 +18,7 @@ export default function Home() {
         <Seperator />
         <div className="flex flex-wrap justify-between p-3">
         {site.projects.map((project) => (
-          <Project key={project.name} project={project} />
+          <ProjectCard key={project.name} {...project} />
         ))}
         </div>
       </Container>

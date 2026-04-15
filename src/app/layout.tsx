@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Instrument_Serif, Geist_Mono, Inter, Geist } from "next/font/google";
 import "./globals.css";
-import { cn } from "@/lib/utils";
+import { cn } from "@/src/lib/utils";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 

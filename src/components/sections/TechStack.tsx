@@ -1,5 +1,5 @@
 import site from "../../data/site.json";
-import TechComp from "../ui/TechComp";
+import TechComp from "../ui/TechStackPill";
 
 export default function TechStack() {
   return (

@@ -1,25 +1,25 @@
 ---
 title: "What is Data Modeling?"
 date: "2026-06-19"
-description: "A practical guide to data modeling — ER diagrams, normalization, and the three layers of database design from concept to production schema."
+description: "A practical guide to data modeling - ER diagrams, normalization, and the three layers of database design from concept to production schema."
 ---
 
-Every application eventually has to answer the same question: **how should we store this data?** A shopping cart, a chat history, a grant application — the features differ, but the underlying problem is the same. You need a structure that is accurate, efficient, and easy to change as requirements evolve.
+Every application eventually has to answer the same question: **how should we store this data?** A shopping cart, a chat history, a grant application - the features differ, but the underlying problem is the same. You need a structure that is accurate, efficient, and easy to change as requirements evolve.
 
-That structure is a **data model**. It is the blueprint for how information is organized, related, and constrained inside a database. Get it wrong early and you pay for it in slow queries, duplicated records, and migrations that take weeks. Get it right and the rest of the stack — APIs, analytics, reporting — becomes much simpler.
+That structure is a **data model**. It is the blueprint for how information is organized, related, and constrained inside a database. Get it wrong early and you pay for it in slow queries, duplicated records, and migrations that take weeks. Get it right and the rest of the stack - APIs, analytics, reporting - becomes much simpler.
 
 This post walks through the core ideas: what data modeling is, the main types of models, how ER diagrams visualize relationships, what normalization solves, and how conceptual, logical, and physical design fit together.
 
 ## What is data modeling?
 
-**Data modeling** is the process of defining what data your system needs, how entities relate to each other, and what rules govern that data — before you write a single `CREATE TABLE` statement.
+**Data modeling** is the process of defining what data your system needs, how entities relate to each other, and what rules govern that data - before you write a single `CREATE TABLE` statement.
 
 A good model captures:
 
-- **Entities** — the "things" you track (users, orders, products, sessions)
-- **Attributes** — properties of those things (email, price, created_at)
-- **Relationships** — how entities connect (a user *places* many orders; an order *contains* many line items)
-- **Constraints** — rules the database enforces (unique emails, non-null foreign keys, valid status values)
+- **Entities** - the "things" you track (users, orders, products, sessions)
+- **Attributes** - properties of those things (email, price, created_at)
+- **Relationships** - how entities connect (a user *places* many orders; an order *contains* many line items)
+- **Constraints** - rules the database enforces (unique emails, non-null foreign keys, valid status values)
 
 You are not just drawing boxes. You are making decisions that affect query performance, data integrity, and how painful future changes will be.
 
@@ -32,7 +32,7 @@ You are not just drawing boxes. You are making decisions that affect query perfo
 | Queries that need 6 joins to answer a simple question | Relationships designed for common access patterns |
 | Schema changes that break production | Layers of design let you iterate before committing |
 
-Whether you are on Postgres, MySQL, or MongoDB, the thinking is the same. Relational databases make constraints explicit; document stores still need the same entity and relationship decisions — they just express them differently.
+Whether you are on Postgres, MySQL, or MongoDB, the thinking is the same. Relational databases make constraints explicit; document stores still need the same entity and relationship decisions - they just express them differently.
 
 ## Types of data models
 
@@ -40,23 +40,23 @@ Data models are often grouped by **level of abstraction** and by **underlying st
 
 ### By abstraction level
 
-1. **Conceptual** — business view. What exists and how it relates, without technical detail.
-2. **Logical** — technology-agnostic structure. Entities, attributes, keys, and cardinalities, but no storage engine specifics.
-3. **Physical** — implementation. Table names, column types, indexes, partitions, and storage choices.
+1. **Conceptual** - business view. What exists and how it relates, without technical detail.
+2. **Logical** - technology-agnostic structure. Entities, attributes, keys, and cardinalities, but no storage engine specifics.
+3. **Physical** - implementation. Table names, column types, indexes, partitions, and storage choices.
 
 These three layers are the backbone of database design. More on them in a dedicated section below.
 
 ### By data structure
 
-**Relational model** — data lives in tables with rows and columns. Relationships use primary and foreign keys. This is the default for most transactional apps (e-commerce, SaaS, banking).
+**Relational model** - data lives in tables with rows and columns. Relationships use primary and foreign keys. This is the default for most transactional apps (e-commerce, SaaS, banking).
 
-**Dimensional model** — optimized for analytics. Fact tables hold measurable events (sales, clicks); dimension tables hold descriptive context (date, product, region). Common in data warehouses and BI.
+**Dimensional model** - optimized for analytics. Fact tables hold measurable events (sales, clicks); dimension tables hold descriptive context (date, product, region). Common in data warehouses and BI.
 
-**Document model** — nested JSON-like documents. Good when data is read and written as a unit (user profiles with preferences, CMS content). Relationships can be embedded or referenced by ID.
+**Document model** - nested JSON-like documents. Good when data is read and written as a unit (user profiles with preferences, CMS content). Relationships can be embedded or referenced by ID.
 
-**Graph model** — nodes and edges. Fits social networks, recommendation engines, and anything where *who is connected to whom* is the primary query pattern.
+**Graph model** - nodes and edges. Fits social networks, recommendation engines, and anything where *who is connected to whom* is the primary query pattern.
 
-**Key-value / wide-column** — simple or highly distributed lookups at massive scale. Think session stores, feature flags, or time-series telemetry.
+**Key-value / wide-column** - simple or highly distributed lookups at massive scale. Think session stores, feature flags, or time-series telemetry.
 
 Most production systems use more than one. A Postgres app might sync events to a warehouse built on a dimensional model, while a Redis layer caches hot key-value reads.
 
@@ -68,30 +68,60 @@ An **ER diagram** is the standard visual language for data models. It answers: *
 
 | Symbol | Meaning |
 |---|---|
-| Rectangle | **Entity** — a distinct object type (Customer, Order) |
-| Oval / attribute list | **Attribute** — a property (email, total_amount) |
-| Diamond | **Relationship** — a verb connecting entities (places, contains) |
+| Rectangle | **Entity** - a distinct object type (Customer, Order) |
+| Oval / attribute list | **Attribute** - a property (email, total_amount) |
+| Diamond | **Relationship** - a verb connecting entities (places, contains) |
 | Lines + cardinality | **How many** on each side (one-to-many, many-to-many) |
 
 ### Cardinality
 
 Cardinality describes how many instances on one side of a relationship map to the other:
 
-- **One-to-one (1:1)** — a User has one Profile
-- **One-to-many (1:N)** — a Customer places many Orders
-- **Many-to-many (M:N)** — Students enroll in many Courses; each Course has many Students
+- **One-to-one (1:1)** - a User has one Profile
+- **One-to-many (1:N)** - a Customer places many Orders
+- **Many-to-many (M:N)** - Students enroll in many Courses; each Course has many Students
 
 Many-to-many relationships almost always need a **junction table** (also called an associative or bridge table) in a relational database:
 
 ```
 ┌──────────┐       ┌─────────────────┐       ┌──────────┐
-│ Student        │──M:N─│ student_course           │─N:M──│ Course         │
-│                │       │ student_id (FK)            │       │                │
-│ id (PK)        │       │ course_id (FK)             │       │ id (PK)        │
+│ Student  │───M:N─│ student_course  │─N:M───│ Course   │
+│          │       │ student_id (FK) │       │          │
+│ id (PK)  │       │ course_id (FK)  │       │ id (PK)  │
 └──────────┘       └─────────────────┘       └──────────┘
 ```
 
-ER diagrams are most useful in the **conceptual** and **logical** phases — when you are aligning with stakeholders and validating that the model actually reflects the business. Once you move to physical design, the same relationships become foreign keys, indexes, and migration files.
+### A small example
+
+An online bookstore might look like this at the logical level:
+
+```
+┌──────────┐         places          ┌──────────┐
+│ Customer │───────────1:N───────────│  Order   │
+│          │                         │          │
+│ id       │                         │ id       │
+│ email    │                         │ total    │
+└──────────┘                         └────┬─────┘
+                                          │
+                                     contains │ 1:N
+                                          │
+                                     ┌────▼─────┐
+                                     │ OrderItem│
+                                     │          │
+                                     │ quantity │
+                                     └────┬─────┘
+                                          │
+                                     references │ N:1
+                                          │
+                                     ┌────▼─────┐
+                                     │ Product  │
+                                     │          │
+                                     │ name     │
+                                     │ price    │
+                                     └──────────┘
+```
+
+ER diagrams are most useful in the **conceptual** and **logical** phases - when you are aligning with stakeholders and validating that the model actually reflects the business. Once you move to physical design, the same relationships become foreign keys, indexes, and migration files.
 
 ## Normalization
 
@@ -99,33 +129,33 @@ ER diagrams are most useful in the **conceptual** and **logical** phases — whe
 
 The problems normalization targets are called **update, insert, and delete anomalies**:
 
-- **Update anomaly** — changing a customer's city requires updating rows in multiple places
-- **Insert anomaly** — you cannot add a product until someone orders it
-- **Delete anomaly** — deleting an order accidentally removes product information you still need
+- **Update anomaly** - changing a customer's city requires updating rows in multiple places
+- **Insert anomaly** - you cannot add a product until someone orders it
+- **Delete anomaly** - deleting an order accidentally removes product information you still need
 
 ### Normal forms (the ones you actually use)
 
-**First Normal Form (1NF)** — each column holds atomic (indivisible) values; no repeating groups.
+**First Normal Form (1NF)** - each column holds atomic (indivisible) values; no repeating groups.
 
 Bad: `tags: "react,typescript,nextjs"` in one cell.
 
 Better: a separate `post_tags` table, or a proper array type if your database supports it and your access patterns justify it.
 
-**Second Normal Form (2NF)** — 1NF, and every non-key attribute depends on the *whole* primary key (relevant for composite keys).
+**Second Normal Form (2NF)** - 1NF, and every non-key attribute depends on the *whole* primary key (relevant for composite keys).
 
-If `order_item(order_id, product_id, product_name, quantity)` uses a composite key, `product_name` only depends on `product_id` — not the full key. Move `product_name` to `product`.
+If `order_item(order_id, product_id, product_name, quantity)` uses a composite key, `product_name` only depends on `product_id` - not the full key. Move `product_name` to `product`.
 
-**Third Normal Form (3NF)** — 2NF, and no non-key attribute depends on another non-key attribute (no transitive dependencies).
+**Third Normal Form (3NF)** - 2NF, and no non-key attribute depends on another non-key attribute (no transitive dependencies).
 
 If `employee(employee_id, department_id, department_name)` stores `department_name` alongside `department_id`, that name depends on `department_id`, not directly on `employee_id`. Split into `employee` and `department`.
 
-**Boyce-Codd Normal Form (BCNF)** — a stricter 3NF. Every determinant is a candidate key. Useful when you have overlapping composite keys or subtle dependency edge cases.
+**Boyce-Codd Normal Form (BCNF)** - a stricter 3NF. Every determinant is a candidate key. Useful when you have overlapping composite keys or subtle dependency edge cases.
 
 In practice, most OLTP schemas aim for **3NF or BCNF**. Going further (4NF, 5NF) is rare outside specialized domains.
 
 ### When to denormalize
 
-Normalization is not a religion. Read-heavy workloads — dashboards, feeds, search indexes — sometimes **denormalize** on purpose: duplicate a `product_name` on `order_item` to avoid a join, or maintain a `order_count` counter on `customer` for fast display.
+Normalization is not a religion. Read-heavy workloads - dashboards, feeds, search indexes - sometimes **denormalize** on purpose: duplicate a `product_name` on `order_item` to avoid a join, or maintain a `order_count` counter on `customer` for fast display.
 
 The tradeoff is always the same: **faster reads vs. harder writes and risk of stale copies**. Denormalize when you have measured the need, not by default.
 
@@ -155,7 +185,7 @@ Example decisions:
 
 **Audience:** Engineers, data architects.
 
-**Output:** Fully specified entities, attributes, primary keys, foreign keys, unique constraints, and cardinalities. Still no `INTEGER` vs `BIGINT` debates — that is physical.
+**Output:** Fully specified entities, attributes, primary keys, foreign keys, unique constraints, and cardinalities. Still no `INTEGER` vs `BIGINT` debates - that is physical.
 
 Example for the bookstore:
 
@@ -197,19 +227,19 @@ Physical design is where abstractions meet reality:
 - Soft deletes (`deleted_at`) vs. hard deletes
 - Read replicas and caching layers sitting on top of the schema
 
-A common mistake is jumping straight to physical design — picking table names and types before the business relationships are settled. The three layers exist so you can change your mind cheaply at the top and commit only when the model is stable.
+A common mistake is jumping straight to physical design - picking table names and types before the business relationships are settled. The three layers exist so you can change your mind cheaply at the top and commit only when the model is stable.
 
 ## Putting it together
 
 A sensible workflow looks like this:
 
-1. **Interview the domain** — nouns, verbs, rules, edge cases
-2. **Draw a conceptual ER diagram** — align with stakeholders
-3. **Refine to a logical model** — keys, constraints, junction tables for M:N
-4. **Normalize to 3NF** — eliminate redundancy and anomalies
-5. **Map to a physical schema** — types, indexes, migrations
-6. **Denormalize selectively** — only where profiling proves it is worth it
+1. **Interview the domain** - nouns, verbs, rules, edge cases
+2. **Draw a conceptual ER diagram** - align with stakeholders
+3. **Refine to a logical model** - keys, constraints, junction tables for M:N
+4. **Normalize to 3NF** - eliminate redundancy and anomalies
+5. **Map to a physical schema** - types, indexes, migrations
+6. **Denormalize selectively** - only where profiling proves it is worth it
 
 Data modeling is not paperwork. It is the discipline of making your data tell the truth, stay consistent under concurrent writes, and remain understandable six months later when you have forgotten why `status` has four values instead of five.
 
-If you are starting a new feature or greenfield service, spend an hour on paper (or a whiteboard tool) before you run `npx drizzle-kit generate` or write your first Prisma schema. The database is the part of your stack that is hardest to unwind — design it deliberately.
+If you are starting a new feature or greenfield service, spend an hour on paper (or a whiteboard tool) before you run `npx drizzle-kit generate` or write your first Prisma schema. The database is the part of your stack that is hardest to unwind - design it deliberately.

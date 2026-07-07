@@ -1,7 +1,13 @@
 "use client";
 
 import React from "react";
-import MermaidDiagram from "./MermaidDiagram";
+import dynamic from "next/dynamic";
+
+// ssr: false ensures mermaid (a browser-only library) is never imported
+// on the server — fixes diagrams disappearing on direct load / refresh.
+const MermaidDiagram = dynamic(() => import("./MermaidDiagram"), {
+    ssr: false,
+});
 
 type CodeChild = React.ReactElement<{ className?: string; children?: string }>;
 

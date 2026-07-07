@@ -62,11 +62,11 @@ You don't go from idea straight to SQL. There are three layers, each answering a
 
 ```mermaid
 flowchart TD
-    A[Conceptual] --> B[Logical]
-    B --> C[Physical]
-    A -.- a1[What does the business care about?]
-    B -.- b1[Keys, entities, constraints]
-    C -.- c1[SQL, indexes, migrations]
+    A[Conceptual]
+    B[Logical]
+    C[Physical]
+    A --> B
+    B --> C
 ```
 
 - **Conceptual** — high-level, no tech details. Just "a Subscription belongs to one Account." Great for aligning with non-engineers.

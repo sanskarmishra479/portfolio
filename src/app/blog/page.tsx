@@ -5,17 +5,17 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog | Sanskar Mishra",
-  description: "Notes on building, tools, and shipping.",
+    title: "Blog | Sanskar Mishra",
+    description: "Notes on building, tools, and shipping.",
 };
 
 function formatPostDate(iso: string): string {
-  const d = parseISO(iso);
-  return isValid(d) ? format(d, "MMMM d, yyyy") : iso;
+    const d = parseISO(iso);
+    return isValid(d) ? format(d, "MMMM d, yyyy") : iso;
 }
 
 export default function BlogIndexPage() {
-  const posts = getAllPosts();
+    const posts = getAllPosts();
 
   return (
     <div className="flex justify-center min-h-screen bg-mainSecondary">
